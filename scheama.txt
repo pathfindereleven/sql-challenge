@@ -13,11 +13,11 @@ CREATE TABLE  titles (
 CREATE TABLE  employees(
    emp_no VARCHAR(30) Unique ,
    title_id VARCHAR(30) ,
-	birth_date VARCHAR(30) ,
+	birth_date Date ,
 	first_name VARCHAR(30) ,
 	last_name VARCHAR(30) ,
 	sex VARCHAR(30) ,
-	hire_date VARCHAR(30), 
+	hire_date date, 
     PRIMARY KEY (emp_no),
 	FOREIGN KEY (title_id) REFERENCES titles (title_id)
 );
@@ -50,6 +50,13 @@ left join salaries using(emp_no);
 SELECT emp_no, last_name, first_name, sex, salary
 from bs 
 
+--question2
+
+select first_name, Last_name, hire_date
+from employees
+ WHERE hire_date >= '1996-01-01'
+AND hire_date < '1997-01-01';
+
 
 --Question 3
 create view manager as
@@ -72,3 +79,30 @@ select last_name, first_name, dept_no, dept_name, emp_no
 from Question4
 
 
+--question 5
+create view Hercules as
+select first_name, last_name, sex  
+from employees
+where first_name = 'Hercules';
+
+select first_name, last_name, sex  
+from Hercules
+where  last_name like 'B%'
+
+
+--question6
+select first_name, last_name, emp_no 
+from Question4
+where dept_name = 'Sales'; 
+
+--question7
+select first_name, last_name, emp_no , dept_name
+from Question4
+where dept_name = 'Sales' or dept_name = 'Development'; 
+
+--question8
+
+SELECT count(last_name) as question8
+FROM employees
+group by last_name
+order by "question8" desc;
